@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="IRepositories\" />
+    <Folder Include="IServices\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Monster.Core\Monster.Core.csproj" />
+    <ProjectReference Include="..\Monster.Entity\Monster.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

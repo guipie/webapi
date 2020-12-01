@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>14c88e4d-f4c0-47ea-b2c3-888c0d64205d</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Monster.Builder\Monster.Builder.csproj" />
+    <ProjectReference Include="..\Monster.Business\Monster.Business.csproj" />
+    <ProjectReference Include="..\Monster.Core\Monster.Core.csproj" />
+    <ProjectReference Include="..\Monster.Entity\Monster.Entity.csproj" />
+    <ProjectReference Include="..\Monster.System\Monster.System.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Upload\" />
+    <Folder Include="Upload\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+
+</Project>
