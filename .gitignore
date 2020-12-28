@@ -4,6 +4,7 @@
 /Monster.WebApi/Download/Logger
 /Monster.WebApi/Download/SqlLog
 /Monster.WebApi/obj
+/Monster.WebApi/wwwroot
 /.vs
 /Monster.Entity/bin
 /Monster.Entity/obj
