@@ -1332,7 +1332,7 @@ namespace Monster.Core.Extensions
                     property.SetValue(source, userInfo.User_Id);
 
                 if (filed == defaultColumns.UserNameField?.ToLower())
-                    property.SetValue(source, userInfo.UserTrueName);
+                    property.SetValue(source, userInfo.UserTrueName ?? "游客");
 
                 if (filed == defaultColumns.DateField?.ToLower())
                     property.SetValue(source, DateTime.Now);
@@ -1341,7 +1341,7 @@ namespace Monster.Core.Extensions
         }
         private static Dictionary<string, object> SetDefaultVal(this Dictionary<string, object> dic, TableDefaultColumns defaultColumns, UserInfo userInfo = null)
         {
-            userInfo = userInfo ?? ManageUser.UserContext.Current.UserInfo;
+            userInfo ??= ManageUser.UserContext.Current.UserInfo;
 
             KeyValuePair<string, object> valuePair = dic.Where(x => x.Key.ToLower() == defaultColumns.UserIdField?.ToLower()).FirstOrDefault();
 
@@ -1353,7 +1353,7 @@ namespace Monster.Core.Extensions
             valuePair = dic.Where(x => x.Key.ToLower() == defaultColumns.UserNameField?.ToLower()).FirstOrDefault();
             if (valuePair.Key != null || defaultColumns.UserNameField != null)
             {
-                dic[valuePair.Key ?? defaultColumns.UserNameField] = userInfo.UserTrueName;
+                dic[valuePair.Key ?? defaultColumns.UserNameField] = userInfo.UserTrueName ?? "游客";
             }
 
             valuePair = dic.Where(x => x.Key.ToLower() == defaultColumns.DateField?.ToLower()).FirstOrDefault();

@@ -1,5 +1,7 @@
-﻿using Monster.Core.Enums;
+﻿using Microsoft.AspNetCore.Mvc;
+using Monster.Core.Enums;
 using Monster.Core.Extensions;
+using System;
 
 namespace Monster.Core.Utilities
 {
@@ -28,6 +30,12 @@ namespace Monster.Core.Utilities
         public static WebResponseContent Instance
         {
             get { return new WebResponseContent(); }
+        }
+        public WebResponseContent Info(bool status, string message = "")
+        {
+            this.Status = status;
+            this.Message = message.IsNullOrEmpty() ? (status ? "操作成功" : "操作失败.") : message;
+            return this;
         }
         public WebResponseContent OK(string message = null, object data = null)
         {
@@ -81,5 +89,9 @@ namespace Monster.Core.Utilities
             return this;
         }
 
+        public static implicit operator WebResponseContent(ActionResult v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

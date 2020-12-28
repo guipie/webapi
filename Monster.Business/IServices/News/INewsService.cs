@@ -8,7 +8,19 @@ namespace Monster.Business.IServices
 {
     public partial interface INewsService : IService<News>
     {
+        /// <summary>
+        /// 网站首页推荐列表
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         object GetRecommendList(PageDataOptions options);
-        object GetHandleOne(int key);
+
+        /// <summary>
+        /// 手机首页列表
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        object GetList(PageDataOptions options);
+        News GetHandleOne(int key);
     }
 }

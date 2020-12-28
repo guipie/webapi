@@ -26,7 +26,7 @@ namespace Monster.Business.Controllers
         {
             return Json(NewsService.Instance.GetRecommendList(options));
         }
-        [HttpGet, HttpPost, Route("{Id}")]
+        [HttpGet, HttpPost, Route("{Id}")] 
         public IActionResult NewsOne(int Id)
         {
             var model = NewsService.Instance.GetOne(Id);

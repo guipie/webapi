@@ -89,13 +89,8 @@ namespace Monster.Core.BaseProvider
             {
                 return base.OrderByExpression.GetExpressionToDic();
             }
-            //排序字段不存在直接移除
-            if (!string.IsNullOrEmpty(pageData.Sort) && !propertyInfo.Any(x => x.Name.ToLower() == pageData.Sort.ToLower()))
-            {
-                pageData.Sort = null;
-            }
-            //如果没有排序字段，则使用主键作为排序字段
-            if (string.IsNullOrEmpty(pageData.Sort))
+            //排序字段不存在直接移除  如果没有排序字段，则使用主键作为排序字段
+            if (!string.IsNullOrEmpty(pageData.Sort) && !propertyInfo.Any(x => pageData.Sort.ToLower().Split(",", StringSplitOptions.RemoveEmptyEntries).Contains(x.Name.ToLower())))
             {
                 PropertyInfo property = propertyInfo.GetKeyProperty();
                 //如果主键不是自增类型则使用appsettings.json中CreateMember->DateField配置的创建时间作为排序
@@ -119,9 +114,10 @@ namespace Monster.Core.BaseProvider
                     }
                 }
             }
-            return new Dictionary<string, QueryOrderBy>() { {
-                    pageData.Sort, pageData.Order?.ToLower() == _asc? QueryOrderBy.Asc: QueryOrderBy.Desc
-                } };
+            var sorts = new Dictionary<string, QueryOrderBy>();
+            foreach (var item in (pageData.Sort ?? "").ToLower().Split(",", StringSplitOptions.RemoveEmptyEntries))
+                sorts.Add(item, pageData.Order?.ToLower() == _asc ? QueryOrderBy.Asc : QueryOrderBy.Desc);
+            return sorts;
         }
 
         /// <summary>

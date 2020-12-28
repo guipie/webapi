@@ -310,12 +310,12 @@ namespace Monster.Core.Extensions
 
             IOrderedQueryable<TEntity> queryableOrderBy = null;
             //  string orderByKey = orderByKeys[^1];
-            string orderByKey = orderByKeys[orderByKeys.Length - 1];
+            string orderByKey = orderByKeys[0];
             queryableOrderBy = orderBySelector[orderByKey] == QueryOrderBy.Desc
                 ? queryableOrderBy = queryable.OrderByDescending(orderByKey.GetExpression<TEntity>())
                 : queryable.OrderBy(orderByKey.GetExpression<TEntity>());
 
-            for (int i = orderByKeys.Length - 2; i >= 0; i--)
+            for (int i = orderByKeys.Length - 1; i >= 1; i--)
             {
                 queryableOrderBy = orderBySelector[orderByKeys[i]] == QueryOrderBy.Desc
                     ? queryableOrderBy.ThenByDescending(orderByKeys[i].GetExpression<TEntity>())

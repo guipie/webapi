@@ -41,7 +41,8 @@ namespace Monster.Business.Services
             AddOnExecuting = (News news, object list) =>
             {
                 if (!(list is List<NewsTypeMapping> newsTypes) || newsTypes.Count == 0)
-                    return responseContent.Error("类别必填");
+                    return responseContent.OK();
+                //return responseContent.Error("类别必填");
                 if (newsTypes.Count > 5)
                     return responseContent.Error("类别不能超过五个");
                 return responseContent.OK();
@@ -111,23 +112,14 @@ namespace Monster.Business.Services
             return base.Update(saveModel);
         }
 
-        public object GetHandleOne(int key)
+        public News GetHandleOne(int key)
         {
             News news = base.GetOne(key);
-            var typeIds = repository.DbContext.Set<NewsTypeMapping>().Where(m => m.NewsId == news.NewsId).Select(m => m.TypeId).ToArray();
+            news.NewsTypes = repository.DbContext.Set<NewsTypeMapping>().Where(m => m.NewsId == news.NewsId).Select(m => m.TypeId).ToArray();
+            news.SeletedCovers = news.CoverImageUrls?.Split(",", StringSplitOptions.RemoveEmptyEntries);
             var tagIds = repository.DbContext.Set<NewsTagMapping>().Where(m => m.NewsId == news.NewsId).Select(m => m.TagId).ToArray();
-            return new
-            {
-                news.NewsId,
-                news.Title,
-                news.Summary,
-                news.Content,
-                news.IsRecommend,
-                news.CoverImageUrls,
-                seletedCovers = news.CoverImageUrls?.Split(",", StringSplitOptions.RemoveEmptyEntries).Select(m => new { path = m }),
-                NewsTypes = typeIds,
-                Tags = tagIds.Length > 0 ? repository.DbContext.Set<NewsTag>().Where(m => tagIds.Contains(m.Id)).Select(m => m.Tag).ToArray() : new string[0]
-            };
+            news.Tags = tagIds.Length > 0 ? repository.DbContext.Set<NewsTag>().Where(m => tagIds.Contains(m.Id)).Select(m => m.Tag).ToArray() : new string[0];
+            return news;
         }
     }
 }

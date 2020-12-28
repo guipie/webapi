@@ -40,7 +40,10 @@ namespace Monster.Core.Crawling.MovieCrawling
                 try
                 {
                     var entity = moviePageCrawlingEntities.Where(m => !m.IsSuccess).FirstOrDefault();
-                    if (entity == null) { taskStatus = 1; return; }
+                    if (entity == null)
+                    {
+                        taskStatus = 1; return;
+                    }
                     var pages = await GetMovieUrlsByPage(entity.CurrentPage);
                     DBServerProvider.SqlDapper.Update(new MovieWebsite() { Id = (int)Website, LastObtainTime = DateTime.Now }, m => new { m.Id, m.LastObtainTime });
                     entity.MovieUrls = pages.Select(m => m.Item1).ToList();
@@ -51,9 +54,12 @@ namespace Monster.Core.Crawling.MovieCrawling
 
                     if (CrawlingType == "new")
                         if (pages.Max(m => m.Item2) < newestObtainTime)
-                        { taskStatus = 1; return; }
+                        {
+                            taskStatus = 1; return;
+                        }
 
                     Thread.Sleep(1000);
+                    if (taskStatus == 3) return;
                 }
                 catch (Exception ex)
                 {
@@ -68,13 +74,17 @@ namespace Monster.Core.Crawling.MovieCrawling
             {
                 try
                 {
-                    if (moviePageCrawlingEntities.Count == 0) return;
-                    foreach (var entity in movieCrawlingEntities.Where(m => m.Status == CurrentStatus.Crawling))
+                    var crawlingMovies = movieCrawlingEntities.Where(m => m.Status == CurrentStatus.Crawling);
+                    if (taskStatus == 1 && crawlingMovies.Count() == 0)
                     {
-                        if (taskStatus == 1 && entity == null) { taskStatus = 2; return; }
+                        taskStatus = 2; return;
+                    }
+                    foreach (var entity in crawlingMovies)
+                    {
                         if (entity != null && entity.SourceUrl.IsNotNullOrEmpty())
                             (await GetMovieDetail(entity.SourceUrl)).MapValueToEntity(entity);
                     }
+                    if (taskStatus == 3) return;
                 }
                 catch (Exception ex)
                 {
@@ -97,9 +107,13 @@ namespace Monster.Core.Crawling.MovieCrawling
             {
                 try
                 {
-                    foreach (var crawlingMovie in movieCrawlingEntities.Where(m => m.Status == CurrentStatus.Crawlinged))
+                    var synchMovies = movieCrawlingEntities.Where(m => m.Status == CurrentStatus.Crawlinged);
+                    if (taskStatus == 2 && synchMovies.Count() == 0)
                     {
-                        if (crawlingMovie == null) { if (taskStatus == 2) { taskStatus = 3; return; } else continue; }
+                        taskStatus = 3; return;
+                    }
+                    foreach (var crawlingMovie in synchMovies)
+                    {
                         string queryMovieSql = "SELECT * from movie WHERE Name=@Name and WebsiteId=@WebsiteId;";
                         var movieEntity = DBServerProvider.SqlDapper.QueryFirst<MovieEntity>(queryMovieSql, new { crawlingMovie.Name, crawlingMovie.WebsiteId });
                         if (movieEntity?.SourceUrl == crawlingMovie.PlayUrls) crawlingMovie.Status = CurrentStatus.CrawlingToDb;
@@ -146,6 +160,8 @@ namespace Monster.Core.Crawling.MovieCrawling
                             }
                         }
                     }
+
+                    if (taskStatus == 3) return;
                 }
                 catch (Exception ex)
                 {

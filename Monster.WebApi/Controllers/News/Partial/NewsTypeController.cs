@@ -10,15 +10,20 @@ using System.Threading.Tasks;
 using Monster.Entity.DomainModels;
 using Monster.Core.Filters;
 using Monster.Core.Enums;
+using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace Monster.Business.Controllers
 {
+    [Route("AppApi/NewsType")]
+    [AllowAnonymous]
     public partial class NewsTypeController
     {
-        [HttpGet, Route("getTree")]
-        public IActionResult GetNewsTypes()
+        [HttpPost, Route("Index")]
+        public IActionResult List([FromBody] PageDataOptions options)
         {
-            return Json(Service.GetByTree());
+            var result = Service.GetPageData(options);
+            return Json(new { data = result.rows.Select(m => new { m.Name }).ToArray(), result.total });
         }
     }
 }

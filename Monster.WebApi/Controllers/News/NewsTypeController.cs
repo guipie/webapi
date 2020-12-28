@@ -16,6 +16,12 @@ namespace Monster.Business.Controllers
         : base(service)
         {
         }
+
+        [HttpGet, Route("getTree")]
+        public IActionResult GetNewsTypes()
+        {
+            return Json(Service.GetByTree());
+        }
     }
 }
 

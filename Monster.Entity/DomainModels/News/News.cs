@@ -35,33 +35,24 @@ namespace Monster.Entity.DomainModels
         [Column(TypeName = "nvarchar(30)")]
         public string Modifier { get; set; }
 
-        /// <summary>
-        ///来源
-        /// </summary>
-        [Display(Name = "来源")]
-        [MaxLength(50)]
-        [Column(TypeName = "nvarchar(50)")]
-        public string Author { get; set; }
 
         /// <summary>
         ///状态
         /// </summary>
         [Display(Name = "状态")]
-        [Column(TypeName = "sbyte")]
-        public sbyte? Status { get; set; }
+        [Column(TypeName = "int"), DefaultValue(1)]
+        public int? Status { get; set; }
 
-        /// <summary>
-        ///发布时间
-        /// </summary>
-        [Display(Name = "发布时间")]
-        [Column(TypeName = "datetime")]
-        public DateTime? ReleaseDate { get; set; }
 
+        [Display(Name = "类别")]
+        [Column(TypeName = "nvarchar(10)"), DefaultValue("article"), Editable(true)]
+        [Required(AllowEmptyStrings = false)]
+        public string Type { get; set; }
         /// <summary>
         ///是否推荐
         /// </summary>
         [Display(Name = "是否推荐")]
-        [Column(TypeName = "tinyint")] 
+        [Column(TypeName = "tinyint"), DefaultValue(false)]
         [Editable(true)]
         [Required(AllowEmptyStrings = false)]
         public bool IsRecommend { get; set; }
@@ -88,13 +79,6 @@ namespace Monster.Entity.DomainModels
         [Column(TypeName = "int")]
         public int? CreateID { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "DetailUrl")]
-        [MaxLength(200)]
-        [Column(TypeName = "nvarchar(200)")]
-        public string DetailUrl { get; set; }
 
         /// <summary>
         ///浏览次数
@@ -162,6 +146,13 @@ namespace Monster.Entity.DomainModels
         [Display(Name = "资讯类别")]
         [ForeignKey("NewsId")]
         public List<NewsTypeMapping> NewsTypeMapping { get; set; }
+
+        [NotMapped]
+        public string[] SeletedCovers { get; set; }
+        [NotMapped]
+        public int[] NewsTypes { get; set; }
+        [NotMapped]
+        public string[] Tags { get; set; }
 
     }
 }

@@ -133,14 +133,6 @@ namespace Monster.Entity.DomainModels
        [Editable(true)]
        public DateTime? CreateDate { get; set; }
 
-       /// <summary>
-       ///是否手机用户
-       /// </summary>
-       [Display(Name ="是否手机用户")]
-       [Column(TypeName="int")]
-       [Editable(true)]
-       [Required(AllowEmptyStrings=false)]
-       public int IsRegregisterPhone { get; set; }
 
        /// <summary>
        ///手机号
@@ -150,13 +142,6 @@ namespace Monster.Entity.DomainModels
        [Column(TypeName="nvarchar(22)")]
        public string PhoneNo { get; set; }
 
-       /// <summary>
-       ///
-       /// </summary>
-       [Display(Name ="Tel")]
-       [MaxLength(40)]
-       [Column(TypeName="nvarchar(40)")]
-       public string Tel { get; set; }
 
        /// <summary>
        ///

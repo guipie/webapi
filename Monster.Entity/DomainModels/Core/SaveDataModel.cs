@@ -13,6 +13,6 @@ namespace Monster.Entity.DomainModels
         /// <summary>
         /// 从前台传入的其他参数(自定义扩展可以使用)
         /// </summary>
-        public object Extra { get; set; }
+        public object Extra { get; set; } 
     }
 }

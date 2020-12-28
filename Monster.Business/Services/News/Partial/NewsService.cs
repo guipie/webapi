@@ -23,10 +23,20 @@ namespace Monster.Business.Services
 {
     public partial class NewsService
     {
+        /// <summary>
+        /// 网站列表
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public object GetRecommendList(PageDataOptions options)
         {
             var result = base.GetPageData(options);
             return new { data = result.rows.Select(m => new { m.NewsId, m.Title, m.CoverImageUrls, m.Summary, m.VideoUrl }).ToList(), result.total };
+        }
+        public object GetList(PageDataOptions options)
+        {
+            var result = base.GetPageData(options);
+            return new { data = result.rows.Select(m => new { m.NewsId, m.Title, m.CoverImageUrls, Uname = "张飞", CommentNum = 25 }).ToList(), result.total };
         }
 
     }

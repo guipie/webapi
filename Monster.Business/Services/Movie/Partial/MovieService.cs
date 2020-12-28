@@ -23,8 +23,7 @@ namespace Monster.Business.Services
             return new
             {
                 data = result.rows.Select(m => new { m.Id, m.Name, m.ImgUrl, m.NewestSet }).ToList(),
-                result.total,
-                nextPage = options.Page * options.Rows < result.total ? options.Page + 1 : -1
+                result.total 
             };
         }
 

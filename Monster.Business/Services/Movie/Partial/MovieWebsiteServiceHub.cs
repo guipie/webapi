@@ -60,7 +60,8 @@ namespace Monster.Business.Services.Movie.Partial
             var result = list.Select(m => new { m.Name, m.SourceUrl, m.Status, m.CrawlingMessage }).Skip((options.Page - 1) * options.Rows).Take(options.Rows).ToList();
             string msg = "暂无采集任务";
             if (IMovieCrawlerFactory.movieCrawlingEntities.Count > 0)
-                msg = $"当前共采集[{IMovieCrawlerFactory.moviePageCrawlingEntities.Where(m => m.IsSuccess).Count()}]页数据," +
+                msg = $"第{(IMovieCrawlerFactory.taskStatus > 0 ? IMovieCrawlerFactory.taskStatus : 1)}步：" +
+                      $"当前共采集[{IMovieCrawlerFactory.moviePageCrawlingEntities.Where(m => m.IsSuccess).Count()}]页数据," +
                       $"[{IMovieCrawlerFactory.movieCrawlingEntities.Where(m => m.Status == CurrentStatus.Crawling).Count()}]条影视待采集," +
                       $"[{IMovieCrawlerFactory.movieCrawlingEntities.Where(m => m.Status == CurrentStatus.CrawlingToDb).Count()}]条已同步数据库";
             return new { rows = result, total = list.Count(), extra = msg };

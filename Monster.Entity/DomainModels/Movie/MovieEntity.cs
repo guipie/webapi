@@ -183,5 +183,13 @@ namespace Monster.Entity.DomainModels
         public DateTime? ModifyDate { get; set; }
 
 
+        /// <summary>
+        ///是否推荐
+        /// </summary>
+        [Display(Name = "是否推荐")]
+        [Column(TypeName = "tinyint")]
+        [Editable(true)]
+        [Required(AllowEmptyStrings = false)]
+        public bool IsRecommend { get; set; }
     }
 }
