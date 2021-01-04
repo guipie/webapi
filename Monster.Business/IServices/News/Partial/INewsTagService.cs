@@ -14,8 +14,8 @@ namespace Monster.Business.IServices
 {
     public partial interface INewsTagService
     {
-        Task<IList> TagsByKey(string key);
+        object TagsByKey(string key);
+        object HotTags();
 
-        IQueryable<NewsTag> TagsByNewsId(int newsId);
     }
 }

@@ -22,15 +22,13 @@ namespace Monster.Business.Services
 {
     public partial class NewsTagService
     {
-        public async Task<IList> TagsByKey(string key)
+        public object TagsByKey(string key)
         {
-            return await repository.FindAsIQueryable(m => key.IsNullOrEmpty() ? true : m.Tag.Trim().Contains(key.Trim())).Take(20).Select(m => new { key = m.Id.ToString(), value = m.Tag }).ToListAsync();
+            return repository.FindAsIQueryable(m => key.IsNullOrEmpty() || m.Tag.Trim().Contains(key.Trim())).Take(10).Select(m => new { m.Tag, m.UseCount });
         }
-
-        public IQueryable<NewsTag> TagsByNewsId(int newsId)
+        public object HotTags()
         {
-            var tagMappings = repository.DbContext.Set<NewsTagMapping>().Where(m => m.NewsId == newsId).Select(m => m.TagId).ToArray();
-            return repository.FindAsIQueryable(m => tagMappings.Contains(m.Id));
+            return repository.FindAsIQueryable(m => true).Take(10).OrderByDescending(m => m.UseCount).Select(m => new { m.Tag, m.UseCount });
         }
     }
 }

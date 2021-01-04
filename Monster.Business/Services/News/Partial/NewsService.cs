@@ -28,15 +28,46 @@ namespace Monster.Business.Services
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public object GetRecommendList(PageDataOptions options)
-        {
-            var result = base.GetPageData(options);
-            return new { data = result.rows.Select(m => new { m.NewsId, m.Title, m.CoverImageUrls, m.Summary, m.VideoUrl }).ToList(), result.total };
-        }
         public object GetList(PageDataOptions options)
         {
             var result = base.GetPageData(options);
-            return new { data = result.rows.Select(m => new { m.NewsId, m.Title, m.CoverImageUrls, Uname = "张飞", CommentNum = 25 }).ToList(), result.total };
+            var data = from news in result.rows
+                       join users in repository.DbContext.Set<Sys_User>()
+                       on news.CreateID equals users.User_Id
+                       select new
+                       {
+                           news.NewsId,
+                           news.CoverImageUrls,
+                           news.Type,
+                           news.Title,
+                           news.Summary,
+                           news.VideoUrl,
+                           news.VoiceUrl,
+                           news.CreateDate,
+                           users.UserTrueName,
+                           users.HeadImageUrl
+                       };
+            return new { data, result.total };
+        }
+        public object GetDetail(int Id)
+        {
+            var news = base.GetOne(Id);
+            var user = repository.DbContext.Set<Sys_User>().Where(m => m.User_Id == news.CreateID).FirstOrDefault();
+            var result = new
+            {
+                news.NewsId,
+                news.CoverImageUrls,
+                news.Type,
+                news.Title,
+                news.Summary,
+                news.Content,
+                news.VideoUrl,
+                news.VoiceUrl,
+                news.CreateDate,
+                user.UserTrueName,
+                user.HeadImageUrl
+            };
+            return result;
         }
 
     }

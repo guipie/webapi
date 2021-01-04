@@ -15,7 +15,12 @@ namespace Monster.Core.Enums
         NoRolePermissions,
         LoginError,
         AccountLocked,
-        LoginSuccess,
+        NoKey,
+        NoKeyQuery,
+        NoKeyDel,
+        KeyError,
+        Other,
+        LoginSuccess = 2000,
         SaveSuccess,
         AuditSuccess,
         OperSuccess,
@@ -23,11 +28,6 @@ namespace Monster.Core.Enums
         ModifyPwdSuccess,
         EidtSuccess,
         DelSuccess,
-        QuerySuccess,
-        NoKey,
-        NoKeyQuery,
-        NoKeyDel,
-        KeyError,
-        Other
+        QuerySuccess
     }
 }

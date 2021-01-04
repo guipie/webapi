@@ -49,76 +49,39 @@ namespace Monster.Business.Services
             };
             AddOnExecuted = (News news, object list) =>
             {
-                string[] tags = saveModel.Extra.ToString().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (news.Tags.IsNullOrEmpty())
+                    return responseContent.OK();
+                string[] tags = news.Tags?.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (tags.Length > 5)
                     return responseContent.Error("标签不能超过5个");
-                if (tags.Length == 0)
-                    return responseContent.OK("创建成功.");
-                List<NewsTagMapping> tag_Mappings = new List<NewsTagMapping>();
-                for (int i = 0; i < tags.Length; i++)
+                if (tags.Length > 0)
                 {
-                    var tagModel = repository.DbContext.Set<NewsTag>().Where(m => m.Tag == tags[i]).FirstOrDefault();
-                    if (tagModel == null)
+                    for (int i = 0; i < tags.Length; i++)
                     {
-                        tagModel = new NewsTag() { Tag = tags[i] };
-                        tagModel.SetCreateDefaultVal();
-                        repository.DbContext.Set<NewsTag>().Add(tagModel);
-                        repository.DbContext.SaveChanges();
+                        var tagModel = repository.DbContext.Set<NewsTag>().Where(m => m.Tag == tags[i]).FirstOrDefault();
+                        if (tagModel == null)
+                        {
+                            tagModel = new NewsTag() { Tag = tags[i], UseCount = 1 };
+                            tagModel.SetCreateDefaultVal();
+                            repository.DbContext.Set<NewsTag>().Add(tagModel);
+                        }
+                        else
+                        {
+                            tagModel.UseCount += 1;
+                            repository.DbContext.Set<NewsTag>().Update(tagModel);
+                        }
                     }
-                    tag_Mappings.Add(new NewsTagMapping() { TagId = tagModel.Id, NewsId = news.NewsId });
+                    if (repository.DbContext.SaveChanges() > 0)
+                        return responseContent.OK("创建成功.");
                 }
-                repository.DbContext.Set<NewsTagMapping>().AddRange(tag_Mappings);
-                if (repository.DbContext.SaveChanges() > 0)
-                    return responseContent.OK("创建成功.");
-                else
-                    return responseContent.Error("创建失败.");
+                return responseContent.OK();
             };
             return base.Add(saveModel);
         }
-
-        public override WebResponseContent Update(SaveModel saveModel)
-        {
-            WebResponseContent responseContent = new WebResponseContent();
-            UpdateOnExecute = (SaveModel saveModel) =>
-            {
-                List<object> currentDelKeys = new List<object>();
-                int NewsId = saveModel.MainData.GetValue("NewsId").ToInt();
-                saveModel.DelKeys = repository.DbContext.Set<NewsTypeMapping>().Where(m => m.NewsId == NewsId).Select(m => (object)m.Id).ToList();
-
-                string[] tags = saveModel.Extra.ToString().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                if (tags.Length > 5)
-                    return responseContent.Error("标签不能超过5个");
-                if (tags.Length == 0)
-                    return responseContent.OK("创建成功.");
-                List<NewsTagMapping> tag_Mappings = new List<NewsTagMapping>();
-                var delKeys = repository.DbContext.Set<NewsTagMapping>().Where(m => m.NewsId == NewsId).Select(m => (object)m.Id).ToArray();
-                repository.DapperContext.DelWithKey<NewsTagMapping>(delKeys);
-                for (int i = 0; i < tags.Length; i++)
-                {
-                    var tagModel = repository.DbContext.Set<NewsTag>().Where(m => m.Tag == tags[i]).FirstOrDefault();
-                    if (tagModel == null)
-                    {
-                        tagModel = new NewsTag() { Tag = tags[i] };
-                        tagModel.SetCreateDefaultVal();
-                        repository.DbContext.Set<NewsTag>().Add(tagModel);
-                        repository.DbContext.SaveChanges();
-                    }
-                    tag_Mappings.Add(new NewsTagMapping() { TagId = tagModel.Id, NewsId = NewsId });
-                }
-                repository.DbContext.Set<NewsTagMapping>().AddRange(tag_Mappings);
-                repository.DbContext.SaveChanges();
-                return responseContent.OK();
-            };
-            return base.Update(saveModel);
-        }
-
         public News GetHandleOne(int key)
         {
             News news = base.GetOne(key);
             news.NewsTypes = repository.DbContext.Set<NewsTypeMapping>().Where(m => m.NewsId == news.NewsId).Select(m => m.TypeId).ToArray();
-            news.SeletedCovers = news.CoverImageUrls?.Split(",", StringSplitOptions.RemoveEmptyEntries);
-            var tagIds = repository.DbContext.Set<NewsTagMapping>().Where(m => m.NewsId == news.NewsId).Select(m => m.TagId).ToArray();
-            news.Tags = tagIds.Length > 0 ? repository.DbContext.Set<NewsTag>().Where(m => tagIds.Contains(m.Id)).Select(m => m.Tag).ToArray() : new string[0];
             return news;
         }
     }

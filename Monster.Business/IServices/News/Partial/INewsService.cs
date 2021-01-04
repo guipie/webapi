@@ -9,5 +9,12 @@ namespace Monster.Business.IServices
 {
     public partial interface INewsService
     {
+        /// <summary>
+        /// 内容列表
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        object GetList(PageDataOptions options);
+        object GetDetail(int key);
     }
- }
+}

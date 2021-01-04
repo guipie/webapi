@@ -24,13 +24,12 @@ namespace Monster.Business.Controllers
         [HttpPost, Route("Index")]
         public IActionResult RecommendList([FromBody] PageDataOptions options)
         {
-            return Json(NewsService.Instance.GetRecommendList(options));
+            return Json(NewsService.Instance.GetList(options));
         }
-        [HttpGet, HttpPost, Route("{Id}")] 
+        [HttpGet, HttpPost, Route("{Id}")]
         public IActionResult NewsOne(int Id)
         {
-            var model = NewsService.Instance.GetOne(Id);
-            return Json(new { model.Title, model.Content, model.VideoUrl, model.Summary });
+            return Json(NewsService.Instance.GetDetail(Id));
         }
     }
 }

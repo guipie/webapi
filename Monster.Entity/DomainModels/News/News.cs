@@ -85,8 +85,20 @@ namespace Monster.Entity.DomainModels
         /// </summary>
         [Display(Name = "浏览次数")]
         [Column(TypeName = "int"), DefaultValue(1)]
-        public int? ViewCount { get; set; }
+        public int ViewCount { get; set; }
+        /// <summary>
+        ///浏览次数
+        /// </summary>
+        [Display(Name = "点赞次数")]
+        [Column(TypeName = "int"), DefaultValue(1)]
+        public int PraiseCount { get; set; }
 
+        /// <summary>
+        ///浏览次数
+        /// </summary>
+        [Display(Name = "是否可见类型")]
+        [Column(TypeName = "int"), DefaultValue(1)]
+        public int Visible { get; set; }
         /// <summary>
         ///内容
         /// </summary>
@@ -119,6 +131,12 @@ namespace Monster.Entity.DomainModels
         [Editable(true)]
         public string VideoUrl { get; set; }
 
+        [Display(Name = "声音地址")]
+        [MaxLength(200)]
+        [Column(TypeName = "nvarchar(200)")]
+        [Editable(true)]
+        public string VoiceUrl { get; set; }
+
         /// <summary>
         ///标题
         /// </summary>
@@ -128,6 +146,12 @@ namespace Monster.Entity.DomainModels
         [Required(AllowEmptyStrings = false)]
         [Editable(true)]
         public string Title { get; set; }
+
+        [Display(Name = "话题tag")]
+        [MaxLength(50)]
+        [Column(TypeName = "nvarchar(50)")]
+        [Editable(true)]
+        public string Tags { get; set; }
 
         /// <summary>
         ///创建时间
@@ -148,11 +172,7 @@ namespace Monster.Entity.DomainModels
         public List<NewsTypeMapping> NewsTypeMapping { get; set; }
 
         [NotMapped]
-        public string[] SeletedCovers { get; set; }
-        [NotMapped]
         public int[] NewsTypes { get; set; }
-        [NotMapped]
-        public string[] Tags { get; set; }
 
     }
 }

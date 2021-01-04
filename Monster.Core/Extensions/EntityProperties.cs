@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
@@ -1072,6 +1073,9 @@ namespace Monster.Core.Extensions
                         && property.PropertyType != typeof(decimal)
                         )
                     {
+                        var d = property.GetCustomAttribute<DefaultValueAttribute>();
+                        if (d != null)
+                        { dic[property.Name] = d.Value; continue; }
                         return property.GetTypeCustomValue<DisplayAttribute>(x => x.Name) + "为必须提交项";
                     }
                     continue;

@@ -33,9 +33,15 @@ namespace Monster.Entity.DomainModels
         [MaxLength(20)]
         [Column(TypeName = "nvarchar(20)")]
         [Required(AllowEmptyStrings = false)]
-        [Editable(true)]
+        [Editable(true)] 
         public string Tag { get; set; }
 
+        [Display(Name = "使用次数")] 
+        [Column(TypeName = "int")]
+        [Required(AllowEmptyStrings = false)]
+        [Editable(true)]
+        public int UseCount { get; set; }
+        
         /// <summary>
         ///创建时间
         /// </summary>

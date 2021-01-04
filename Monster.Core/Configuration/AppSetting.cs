@@ -40,6 +40,7 @@ namespace Monster.Core.Configuration
         /// Actions权限过滤
         /// </summary>
         public static GlobalFilter GlobalFilter { get; set; }
+        public static QiNiuSetting QiNiuSetting { get; set; }
 
 
         /// <summary>
@@ -57,6 +58,7 @@ namespace Monster.Core.Configuration
             services.Configure<CreateMember>(configuration.GetSection("CreateMember"));
             services.Configure<ModifyMember>(configuration.GetSection("ModifyMember"));
             services.Configure<GlobalFilter>(configuration.GetSection("GlobalFilter"));
+            services.Configure<QiNiuSetting>(configuration.GetSection("QiNiu"));
 
 
             var provider = services.BuildServiceProvider();
@@ -72,10 +74,11 @@ namespace Monster.Core.Configuration
             GlobalFilter = provider.GetRequiredService<IOptions<GlobalFilter>>().Value ?? new GlobalFilter();
 
             GlobalFilter.Actions = GlobalFilter.Actions ?? new string[0];
+            QiNiuSetting = provider.GetRequiredService<IOptions<QiNiuSetting>>().Value ?? new QiNiuSetting();
 
             _connection = provider.GetRequiredService<IOptions<Connection>>().Value;
 
-    
+
 
             ExpMinutes = (configuration["ExpMinutes"] ?? "120").GetInt();
 
@@ -119,10 +122,10 @@ namespace Monster.Core.Configuration
         public bool UseRedis { get; set; }
     }
 
-    public class CreateMember: TableDefaultColumns
+    public class CreateMember : TableDefaultColumns
     {
     }
-    public class ModifyMember: TableDefaultColumns
+    public class ModifyMember : TableDefaultColumns
     {
     }
 
@@ -137,5 +140,14 @@ namespace Monster.Core.Configuration
         public string Message { get; set; }
         public bool Enable { get; set; }
         public string[] Actions { get; set; }
+    }
+    public class QiNiuSetting
+    {
+        public string AccessKey { get; set; }
+        public string SecretKey { get; set; }
+
+        public string Bucket { get; set; }
+
+        public string Domain { get; set; }
     }
 }

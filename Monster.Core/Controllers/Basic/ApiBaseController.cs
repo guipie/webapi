@@ -7,7 +7,9 @@ using Monster.Core.Extensions;
 using Monster.Core.Filters;
 using Monster.Core.Utilities;
 using Monster.Entity.DomainModels;
-using System;
+using Monster.Core.Configuration;
+using Qiniu.Storage;
+using Qiniu.Util;
 
 namespace Monster.Core.Controllers.Basic
 {
@@ -68,6 +70,25 @@ namespace Monster.Core.Controllers.Basic
         //{
         //    return await base.Upload(fileInput);
         //}
+
+        /// <summary>
+        /// 获取七牛上传Token
+        /// </summary>
+        /// <param name="fileInput"></param>
+        /// <returns></returns>
+        [HttpPost, Route("QiNiu/Token")]
+        [ApiActionPermission(Enums.ActionPermissionOptions.Upload)]
+        public IActionResult QnToken(IEnumerable<IFormFile> fileInput)
+        {
+
+            Mac mac = new Mac(AppSetting.QiNiuSetting.AccessKey, AppSetting.QiNiuSetting.SecretKey);
+            PutPolicy putPolicy = new PutPolicy
+            {
+                Scope = AppSetting.QiNiuSetting.Bucket
+            };
+            string token = Auth.CreateUploadToken(mac, putPolicy.ToJsonString());
+            return Json(new { token, domain = AppSetting.QiNiuSetting.Domain });
+        }
         /// <summary>
         /// 上传文件
         /// </summary>

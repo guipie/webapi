@@ -10,16 +10,22 @@ using System.Threading.Tasks;
 using Monster.Entity.DomainModels;
 using Monster.Core.Enums;
 using Monster.Core.Filters;
+using Monster.Entity.AttributeManager;
 
 namespace Monster.Business.Controllers
 {
+    [Route("AppApi/NewsTag")]
     public partial class NewsTagController
     {
-        [HttpGet, Route("getByKey")]
-        [ApiActionPermission("news_tag", "1", ActionPermissionOptions.Search)]
-        public async Task<IActionResult> GetTreeItem(string value)
+        [HttpGet, Route("GetByKeyword")]
+        public IActionResult GetTreeItem(string keyword)
         {
-            return Json(await Service.TagsByKey(value));
+            return Json(Service.TagsByKey(keyword));
+        }
+        [HttpGet, Route("Hot")]
+        public IActionResult GetHotTags()
+        {
+            return Json(Service.HotTags());
         }
     }
 }

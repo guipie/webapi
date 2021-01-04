@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Monster.Core.Controllers.Basic;
 using Monster.Entity.AttributeManager;
 using Monster.Business.IServices;
+using System.Threading.Tasks;
+using Monster.Core.Filters;
+using Monster.Core.Enums;
+
 namespace Monster.Business.Controllers
 {
     [Route("api/NewsTag")]
@@ -16,6 +20,7 @@ namespace Monster.Business.Controllers
         : base(service)
         {
         }
+
     }
 }
 
