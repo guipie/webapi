@@ -47,7 +47,7 @@ namespace Monster.Business.Services
                            users.UserTrueName,
                            users.HeadImageUrl
                        };
-            return new { data, result.total };
+            return new { data, result.total, size = options.Rows };
         }
         public object GetDetail(int Id)
         {

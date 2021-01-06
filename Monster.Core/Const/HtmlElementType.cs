@@ -21,6 +21,7 @@ namespace Monster.Core.Const
         public const string GT = ">";
         public const string LT = "<";
         public const string like = "like";
+        public const string notlike = "notlike";
 
         public const string ThanOrEqual = ">=";
         public const string LessOrequal = "<=";

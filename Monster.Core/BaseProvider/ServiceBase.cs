@@ -131,6 +131,7 @@ namespace Monster.Core.BaseProvider
             options ??= new PageDataOptions();
 
             List<SearchParameters> searchParametersList = new List<SearchParameters>();
+            List<List<SearchParameters>> searchUnionParametersList = new List<List<SearchParameters>>();
             if (!string.IsNullOrEmpty(options.Wheres))
             {
                 try
@@ -139,10 +140,18 @@ namespace Monster.Core.BaseProvider
                 }
                 catch { }
             }
+            if (!string.IsNullOrEmpty(options.UnionWheres))
+            {
+                try
+                {
+                    searchUnionParametersList = options.UnionWheres.DeserializeObject<List<List<SearchParameters>>>();
+                }
+                catch { }
+            }
             QueryRelativeList?.Invoke(searchParametersList);
             //  Connection
             queryable = repository.DbContext.Set<T>();
-            //判断列的数据类型数字，日期的需要判断值的格式是否正确
+            //searchParametersList 判断列的数据类型数字，日期的需要判断值的格式是否正确
             for (int i = 0; i < searchParametersList.Count; i++)
             {
                 SearchParameters x = searchParametersList[i];
@@ -168,6 +177,36 @@ namespace Monster.Core.BaseProvider
                               ? queryable.Where(x.Name.CreateExpression<T>(values, expressionType))
                               : queryable.Where(x.Name.CreateExpression<T>(x.Value, expressionType));
 
+            }
+            // searchUnionParametersList 判断列的数据类型数字，日期的需要判断值的格式是否正确
+            for (int j = 0; j < searchUnionParametersList.Count; j++)
+            {
+                Expression<Func<T, bool>> expression = a => false;
+                for (int i = 0; i < searchUnionParametersList[j].Count; i++)
+                {
+                    SearchParameters x = searchUnionParametersList[j][i];
+                    x.DisplayType = x.DisplayType.GetDBCondition();
+                    if (string.IsNullOrEmpty(x.Value))
+                    {
+                        continue;
+                    }
+                    PropertyInfo property = TProperties.Where(c => c.Name.ToUpper() == x.Name.ToUpper()).FirstOrDefault();
+                    //2020.06.25增加字段null处理
+                    if (property == null) continue;
+                    // property
+                    //移除查询的值与数据库类型不匹配的数据
+                    object[] values = property.ValidationValueForDbType(x.Value.Split(',')).Where(q => q.Item1).Select(s => s.Item3).ToArray();
+                    if (values == null || values.Length == 0)
+                    {
+                        continue;
+                    }
+                    if (x.DisplayType == HtmlElementType.Contains)
+                        x.Value = string.Join(",", values);
+                    LinqExpressionType expressionType = x.DisplayType.GetLinqCondition();
+                    Expression<Func<T, bool>> expressionItem = LinqExpressionType.In == expressionType ? x.Name.CreateExpression<T>(values, expressionType) : x.Name.CreateExpression<T>(x.Value, expressionType);
+                    expression = expression.Or(expressionItem);
+                }
+                queryable = queryable.Where(expression);
             }
             options.TableName = TableName ?? typeof(T).Name;
             return options;

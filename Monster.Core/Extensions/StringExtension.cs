@@ -116,37 +116,22 @@ namespace Monster.Core.Extensions
 
         public static LinqExpressionType GetLinqCondition(this string stringType)
         {
-            LinqExpressionType linqExpression;
-            switch (stringType)
+            var linqExpression = stringType switch
             {
-                case HtmlElementType.Contains:
-                    linqExpression = LinqExpressionType.In;
-                    break;
-                case HtmlElementType.ThanOrEqual:
-                    linqExpression = LinqExpressionType.ThanOrEqual;
-                    break;
-                case HtmlElementType.LessOrequal:
-                    linqExpression = LinqExpressionType.LessThanOrEqual;
-                    break;
-                case HtmlElementType.GT:
-                    linqExpression = LinqExpressionType.GreaterThan;
-                    break;
-                case HtmlElementType.lt:
-                    linqExpression = LinqExpressionType.LessThan;
-                    break;
-                case HtmlElementType.like:
-                    linqExpression = LinqExpressionType.Contains;
-                    break;
-                default:
-                    linqExpression = LinqExpressionType.Equal;
-                    break;
-            }
+                HtmlElementType.Contains => LinqExpressionType.In,
+                HtmlElementType.ThanOrEqual => LinqExpressionType.ThanOrEqual,
+                HtmlElementType.LessOrequal => LinqExpressionType.LessThanOrEqual,
+                HtmlElementType.GT => LinqExpressionType.GreaterThan,
+                HtmlElementType.lt => LinqExpressionType.LessThan,
+                HtmlElementType.like => LinqExpressionType.Contains,
+                HtmlElementType.notlike => LinqExpressionType.NotContains,
+                _ => LinqExpressionType.Equal,
+            };
             return linqExpression;
         }
 
         public static bool GetGuid(this string guid, out Guid outId)
         {
-            Guid emptyId = Guid.Empty;
             return Guid.TryParse(guid, out outId);
         }
 
@@ -160,7 +145,7 @@ namespace Monster.Core.Extensions
         {
             if (obj == null)
                 return false;
-            bool reslut = Int32.TryParse(obj.ToString(), out int _number);
+            bool reslut = int.TryParse(obj.ToString(), out int _number);
             return reslut;
 
         }

@@ -76,7 +76,7 @@ namespace Monster.Business.Services
                 }
                 return responseContent.OK();
             };
-            return base.Add(saveModel);
+            return base.Add(saveModel).OK("已提交，正在审核中..");
         }
         public News GetHandleOne(int key)
         {

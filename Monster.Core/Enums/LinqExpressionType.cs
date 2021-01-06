@@ -13,7 +13,7 @@ namespace Monster.Core.Enums
         ThanOrEqual,//>=
         LessThanOrEqual,//<=
         In,
-        Contains,//Contains
+        Contains,//Contains 
         NotContains//NotContains
     }
 }
