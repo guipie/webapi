@@ -8,6 +8,5 @@ namespace Monster.Business.IServices
 {
     public partial interface INewsService : IService<News>
     {
-        News GetHandleOne(int key);
     }
 }

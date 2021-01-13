@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json.Linq;
 using Dapper;
+using Monster.Business.IServices;
+using Monster.Core.Enums;
 
 namespace Monster.Business.Services
 {
@@ -38,26 +40,29 @@ namespace Monster.Business.Services
                        {
                            news.NewsId,
                            news.CoverImageUrls,
-                           news.Type,
+                           news.TypeId,
                            news.Title,
                            news.Summary,
                            news.VideoUrl,
                            news.VoiceUrl,
                            news.CreateDate,
                            users.UserTrueName,
-                           users.HeadImageUrl
+                           users.HeadImageUrl,
+                           PraiseCount = newsPraiseRepository.FindAsIQueryable(m => m.NewsId == news.NewsId).Count(),
+                           CommentCount = newsCommentRepository.FindAsIQueryable(m => m.RelationId == news.NewsId).Count()
                        };
             return new { data, result.total, size = options.Rows };
         }
         public object GetDetail(int Id)
         {
             var news = base.GetOne(Id);
+            if (news == null) return WebResponseContent.Instance.OK(ResponseType.NotFound);
             var user = repository.DbContext.Set<Sys_User>().Where(m => m.User_Id == news.CreateID).FirstOrDefault();
             var result = new
             {
                 news.NewsId,
                 news.CoverImageUrls,
-                news.Type,
+                news.TypeId,
                 news.Title,
                 news.Summary,
                 news.Content,

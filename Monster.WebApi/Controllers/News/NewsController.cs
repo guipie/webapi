@@ -33,14 +33,15 @@ namespace Monster.Business.Controllers
         [HttpGet, HttpPost, Route("admin/{Id}")]
         public IActionResult AdminNewsOne(int Id)
         {
-            //设置序列化时key为默认
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                ContractResolver = new DefaultContractResolver(),
-                Formatting = Formatting.Indented
-            };
-            var model = NewsService.Instance.GetHandleOne(Id);
-            return Json(model, settings);
+            ////设置序列化时key为默认
+            //JsonSerializerSettings settings = new JsonSerializerSettings
+            //{
+            //    ContractResolver = new DefaultContractResolver(),
+            //    Formatting = Formatting.Indented
+            //};
+            //var model = NewsService.Instance.GetHandleOne(Id);
+            //return Json(model, settings);
+            return null;
         }
     }
 }

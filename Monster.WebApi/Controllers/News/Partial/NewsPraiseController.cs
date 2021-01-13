@@ -11,6 +11,7 @@ using Monster.Entity.DomainModels;
 
 namespace Monster.Business.Controllers
 {
+    [Route("AppApi/NewsPraise")]
     public partial class NewsPraiseController
     {
     }

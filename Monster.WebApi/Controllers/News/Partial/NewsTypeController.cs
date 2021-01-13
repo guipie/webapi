@@ -23,7 +23,14 @@ namespace Monster.Business.Controllers
         public IActionResult List([FromBody] PageDataOptions options)
         {
             var result = Service.GetPageData(options);
-            return Json(new { data = result.rows.Select(m => new { m.Name }).ToArray(), result.total });
+            return Json(new { data = result.rows.Select(m => new { m.Name, m.Id, m.Description, m.BgImg }).ToArray(), result.total });
+        }
+
+        [HttpPost,HttpGet, Route("Recommend")]
+        public IActionResult RecommendList()
+        {
+            var result = Service.GetRecommendList();
+            return Json(result);
         }
     }
 }

@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Monster.Entity.Enums;
 using Monster.Entity.SystemModels;
 
 namespace Monster.Entity.DomainModels
@@ -30,10 +31,9 @@ namespace Monster.Entity.DomainModels
         ///
         /// </summary>
         [Display(Name = "MappingType")]
-        [MaxLength(4)]
-        [Column(TypeName = "nvarchar(4)"), Editable(true)]
+        [Column(TypeName = "int"), Editable(true)]
         [Required(AllowEmptyStrings = false)]
-        public string MappingType { get; set; }
+        public WebsiteHomeConfigType MappingType { get; set; }
 
         /// <summary>
         ///
@@ -46,7 +46,7 @@ namespace Monster.Entity.DomainModels
         /// <summary>
         ///轮播图
         /// </summary>
-        [Display(Name = "轮播图")]
+        [Display(Name = "推荐图")]
         [MaxLength(200)]
         [Column(TypeName = "nvarchar(200)"), Editable(true)]
         [Required(AllowEmptyStrings = false)]

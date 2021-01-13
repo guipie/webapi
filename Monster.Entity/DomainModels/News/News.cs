@@ -15,7 +15,7 @@ using Monster.Entity.SystemModels;
 namespace Monster.Entity.DomainModels
 {
     [Table("News")]
-    [Entity(TableCnName = "资讯管理", TableName = "News", DetailTable = new Type[] { typeof(NewsTypeMapping) }, DetailTableCnName = "资讯类别")]
+    [Entity(TableCnName = "资讯管理", TableName = "News", DetailTableCnName = "资讯类别")]
     public class News : BaseEntity
     {
         /// <summary>
@@ -45,17 +45,17 @@ namespace Monster.Entity.DomainModels
 
 
         [Display(Name = "类别")]
-        [Column(TypeName = "nvarchar(10)"), DefaultValue("article"), Editable(true)]
+        [Column(TypeName = "int"), Editable(true)]
         [Required(AllowEmptyStrings = false)]
-        public string Type { get; set; }
+        public int TypeId { get; set; }
         /// <summary>
         ///是否推荐
         /// </summary>
         [Display(Name = "是否推荐")]
-        [Column(TypeName = "tinyint"), DefaultValue(false)]
+        [Column(TypeName = "int"), DefaultValue(false)]
         [Editable(true)]
         [Required(AllowEmptyStrings = false)]
-        public bool IsRecommend { get; set; }
+        public int IsRecommend { get; set; }
 
         /// <summary>
         ///创建人
@@ -166,13 +166,6 @@ namespace Monster.Entity.DomainModels
         [Display(Name = "ModifyID")]
         [Column(TypeName = "int")]
         public int? ModifyID { get; set; }
-
-        [Display(Name = "资讯类别")]
-        [ForeignKey("NewsId")]
-        public List<NewsTypeMapping> NewsTypeMapping { get; set; }
-
-        [NotMapped]
-        public int[] NewsTypes { get; set; }
 
     }
 }

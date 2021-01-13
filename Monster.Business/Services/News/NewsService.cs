@@ -19,9 +19,13 @@ namespace Monster.Business.Services
 {
     public partial class NewsService : ServiceBase<News, INewsRepository>, INewsService, IDependency
     {
-        public NewsService(INewsRepository repository)
+        private readonly INewsPraiseRepository newsPraiseRepository;
+        private readonly INewsCommentRepository newsCommentRepository;
+        public NewsService(INewsRepository repository, INewsPraiseRepository repository1, INewsCommentRepository repository2)
              : base(repository)
         {
+            newsPraiseRepository = repository1;
+            newsCommentRepository = repository2;
             Init(repository);
         }
         public static INewsService Instance
@@ -38,15 +42,6 @@ namespace Monster.Business.Services
         {
 
             WebResponseContent responseContent = WebResponseContent.Instance;
-            AddOnExecuting = (News news, object list) =>
-            {
-                if (!(list is List<NewsTypeMapping> newsTypes) || newsTypes.Count == 0)
-                    return responseContent.OK();
-                //return responseContent.Error("类别必填");
-                if (newsTypes.Count > 5)
-                    return responseContent.Error("类别不能超过五个");
-                return responseContent.OK();
-            };
             AddOnExecuted = (News news, object list) =>
             {
                 if (news.Tags.IsNullOrEmpty())
@@ -76,13 +71,7 @@ namespace Monster.Business.Services
                 }
                 return responseContent.OK();
             };
-            return base.Add(saveModel).OK("已提交，正在审核中..");
-        }
-        public News GetHandleOne(int key)
-        {
-            News news = base.GetOne(key);
-            news.NewsTypes = repository.DbContext.Set<NewsTypeMapping>().Where(m => m.NewsId == news.NewsId).Select(m => m.TypeId).ToArray();
-            return news;
+            return base.Add(saveModel).OK("已提交，正在审核中.."); 
         }
     }
 }

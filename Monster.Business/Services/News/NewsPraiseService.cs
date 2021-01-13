@@ -15,13 +15,13 @@ namespace Monster.Business.Services
     public partial class NewsPraiseService : ServiceBase<NewsPraise, INewsPraiseRepository>, INewsPraiseService, IDependency
     {
         public NewsPraiseService(INewsPraiseRepository repository)
-             : base(repository) 
-        { 
-           Init(repository);
+             : base(repository)
+        {
+            Init(repository);
         }
         public static INewsPraiseService Instance
         {
-           get { return AutofacContainerModule.GetService<INewsPraiseService>(); }
+            get { return AutofacContainerModule.GetService<INewsPraiseService>(); }
         }
     }
 }

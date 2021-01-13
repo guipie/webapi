@@ -12,6 +12,6 @@ namespace Monster.Business.IServices
 {
     public partial interface INewsTypeService
     {
-        IQueryable GetByTree();
+        object GetRecommendList();
     }
 }

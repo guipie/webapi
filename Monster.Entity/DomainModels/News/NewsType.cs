@@ -4,11 +4,13 @@
  */
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Monster.Entity.Enums;
 using Monster.Entity.SystemModels;
 
 namespace Monster.Entity.DomainModels
@@ -17,6 +19,42 @@ namespace Monster.Entity.DomainModels
     [Table("news_type")]
     public class NewsType : BaseEntity
     {
+        [Key]
+        [Display(Name = "Id")]
+        [Column(TypeName = "int")]
+        [Required(AllowEmptyStrings = false)]
+        public int Id { get; set; }
+
+
+        /// <summary>
+        ///
+        /// </summary>
+        [Display(Name = "Name")]
+        [MaxLength(10)]
+        [Column(TypeName = "nvarchar(10)"), Editable(true)]
+        [Required(AllowEmptyStrings = false)]
+        public string Name { get; set; }
+
+        [Display(Name = "Description")]
+
+        [MaxLength(200)]
+        [Column(TypeName = "nvarchar(200)"), Editable(true)]
+        public string Description { get; set; }
+
+        [Column(TypeName = "mediumtext"), Editable(true)]
+        public string BgImg { get; set; }
+
+
+        [Display(Name = "Sequence")]
+        [Column(TypeName = "int"), Editable(true), DefaultValue(1)]
+        [Required(AllowEmptyStrings = false)]
+        public int Sequence { get; set; }
+
+
+        [Display(Name = "状态")]
+        [Column(TypeName = "int"), Editable(true), DefaultValue(1)]
+        public Status Status { get; set; }
+
         /// <summary>
         ///创建人Id
         /// </summary>
@@ -63,63 +101,6 @@ namespace Monster.Entity.DomainModels
         [Display(Name = "修改时间")]
         [Column(TypeName = "datetime")]
         public DateTime? ModifyDate { get; set; }
-
-
-        /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "IsHidden")]
-        [Column(TypeName = "smallint")]
-        public bool IsHidden { get; set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "Description")]
-        [MaxLength(200)]
-        [Column(TypeName = "nvarchar(200)")]
-        public string Description { get; set; }
-
-
-        [Display(Name = "Sequence")]
-        [Column(TypeName = "short")]
-        [Editable(true)]
-        [Required(AllowEmptyStrings = false)]
-        public short Sequence { get; set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "Code")]
-        [MaxLength(100)]
-        [Column(TypeName = "nvarchar(100)")]
-        [Required(AllowEmptyStrings = false)]
-        [Editable(true)]
-        public string Code { get; set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "Name")]
-        [MaxLength(100)]
-        [Column(TypeName = "nvarchar(100)")]
-        [Required(AllowEmptyStrings = false)]
-        [Editable(true)]
-        public string Name { get; set; }
-
-        [Display(Name = "Pid")]
-        [Column(TypeName = "int")]
-        [Required(AllowEmptyStrings = false)]
-        public int Pid { get; set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        [Key]
-        [Display(Name = "Id")]
-        [Column(TypeName = "int")]
-        [Required(AllowEmptyStrings = false)]
-        public int Id { get; set; }
 
 
     }

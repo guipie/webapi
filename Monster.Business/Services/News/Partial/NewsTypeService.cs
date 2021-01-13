@@ -21,9 +21,17 @@ namespace Monster.Business.Services
 {
     public partial class NewsTypeService
     {
-        public IQueryable GetByTree()
+        public object GetRecommendList()
         {
-            return repository.FindAsIQueryable(m => true).OrderBy(m => m.Sequence).Select(m => new { key = m.Id, value = m.Name, m.Pid });
+            return from recommend in websiteHomeConfigRepository.Find(m => m.MappingType == Entity.Enums.WebsiteHomeConfigType.BBS)
+                   join list in repository.Find(m => m.Status == Entity.Enums.Status.Audited) on recommend.MappingId equals list.Id
+                   select new
+                   {
+                       list.Id,
+                       recommend.Title,
+                       Description = recommend.Description ?? list.Description,
+                       Img = recommend.BannerImg ?? list.BgImg
+                   };
         }
     }
 }

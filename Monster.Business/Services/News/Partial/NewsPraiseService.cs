@@ -14,10 +14,31 @@ using Monster.Core.Utilities;
 using System.Linq.Expressions;
 using Monster.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Monster.Core.ManageUser;
 
 namespace Monster.Business.Services
 {
     public partial class NewsPraiseService
     {
+        public override WebResponseContent Add(SaveModel saveDataModel)
+        {
+            WebResponseContent responseContent = WebResponseContent.Instance;
+            AddOnExecuting = (NewsPraise newsPraise, object list) =>
+            {
+                if (newsPraise.NewsId > 0)
+                {
+                    if (repository.Exists(m => m.NewsId == newsPraise.NewsId && m.CreateID == UserContext.Current.UserId))
+                        return responseContent.Error("已赞过了..");
+                }
+                else
+                    return responseContent.Error("未获取到点赞文章..");
+                return responseContent.OK();
+            };
+            AddOnExecuted = (NewsPraise user, object list) =>
+            {
+                return responseContent.OK("点赞成功.");
+            };
+            return base.Add(saveDataModel);
+        }
     }
 }

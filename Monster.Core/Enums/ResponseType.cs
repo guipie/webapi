@@ -11,6 +11,7 @@ namespace Monster.Core.Enums
         ParametersLack = 303,
         TokenExpiration,
         PINError,
+        NotFound,
         NoPermissions,
         NoRolePermissions,
         LoginError,

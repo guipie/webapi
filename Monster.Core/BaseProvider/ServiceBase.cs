@@ -252,7 +252,7 @@ namespace Monster.Core.BaseProvider
             //生成查询条件
             Expression<Func<T, bool>> whereExpression = entityType.GetKeyName().CreateExpression<T>(key, LinqExpressionType.Equal);
             var queryeable = repository.DbContext.Set<T>().Where(whereExpression);
-            return queryeable.First();
+            return queryeable.FirstOrDefault();
         }
 
         /// <summary>
