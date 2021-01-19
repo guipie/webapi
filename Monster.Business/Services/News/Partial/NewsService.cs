@@ -40,7 +40,7 @@ namespace Monster.Business.Services
                        {
                            news.NewsId,
                            news.CoverImageUrls,
-                           news.TypeId,
+                           news.Type,
                            news.Title,
                            news.Summary,
                            news.VideoUrl,
@@ -62,7 +62,7 @@ namespace Monster.Business.Services
             {
                 news.NewsId,
                 news.CoverImageUrls,
-                news.TypeId,
+                news.Type,
                 news.Title,
                 news.Summary,
                 news.Content,

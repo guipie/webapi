@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Monster.Entity.Enums
 {
+    /// <summary>
+    /// 状态
+    /// </summary>
     public enum Status
     {
         /// <summary>

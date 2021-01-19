@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Monster.Entity.Enums;
 using Monster.Entity.SystemModels;
 
 namespace Monster.Entity.DomainModels
@@ -45,9 +46,13 @@ namespace Monster.Entity.DomainModels
 
 
         [Display(Name = "类别")]
-        [Column(TypeName = "int"), Editable(true)]
+        [Column(TypeName = "nvarchar(20)"), Editable(true), MaxLength(20)]
         [Required(AllowEmptyStrings = false)]
-        public int TypeId { get; set; }
+        public string Type { get; set; }
+
+        [Display(Name = "论坛关联ID")]
+        [Column(TypeName = "int"), Editable(true)]
+        public int? BbsId { get; set; }
         /// <summary>
         ///是否推荐
         /// </summary>

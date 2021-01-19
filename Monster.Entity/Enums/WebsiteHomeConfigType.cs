@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Monster.Entity.Enums
 {
+    /// <summary>
+    /// 轮播推荐类型
+    /// </summary>
     public enum WebsiteHomeConfigType
     {
         News = 1,
