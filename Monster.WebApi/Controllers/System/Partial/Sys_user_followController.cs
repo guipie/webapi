@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     public partial class Sys_user_followController
     {

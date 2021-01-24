@@ -15,9 +15,9 @@ using System.Linq.Expressions;
 using Monster.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Monster.System.Services
+namespace Monster.Business.Services
 {
-    public partial class Sys_user_followService
+    public partial class UserFollowService
     {
     }
 }

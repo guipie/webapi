@@ -11,11 +11,11 @@ using Monster.Core.UserManager;
 using Monster.Core.Utilities;
 using Monster.Entity.AttributeManager;
 using Monster.Entity.DomainModels;
-using Monster.System.IServices;
-using Monster.System.Repositories;
-using Monster.System.Services;
+using Monster.Sys.IServices;
+using Monster.Sys.Repositories;
+using Monster.Sys.Services;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     [Route("api/role")]
     public partial class Sys_RoleController

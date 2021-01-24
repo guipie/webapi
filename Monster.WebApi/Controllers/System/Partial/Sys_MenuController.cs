@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Monster.Core.Enums;
 using Monster.Core.Filters;
 using Monster.Entity.DomainModels;
-using Monster.System.IServices;
+using Monster.Sys.IServices;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     public partial class Sys_MenuController
     {

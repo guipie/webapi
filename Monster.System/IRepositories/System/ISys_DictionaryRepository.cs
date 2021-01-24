@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Monster.Core.BaseProvider;
 using Monster.Entity.DomainModels;
 using Monster.Core.Extensions.AutofacManager;
-namespace Monster.System.IRepositories
+namespace Monster.Sys.IRepositories
 {
     public partial interface ISys_DictionaryRepository : IDependency,IRepository<Sys_Dictionary>
     {

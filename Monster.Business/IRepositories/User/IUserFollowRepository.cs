@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Monster.Core.BaseProvider;
 using Monster.Entity.DomainModels;
 using Monster.Core.Extensions.AutofacManager;
-namespace Monster.System.IRepositories
+namespace Monster.Business.IRepositories
 {
-    public partial interface ISys_user_followRepository : IDependency,IRepository<Sys_user_follow>
+    public partial interface IUserFollowRepository : IDependency,IRepository<Sys_user_follow>
     {
     }
 }

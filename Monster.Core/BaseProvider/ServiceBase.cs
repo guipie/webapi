@@ -208,7 +208,7 @@ namespace Monster.Core.BaseProvider
                 }
                 queryable = queryable.Where(expression);
             }
-            options.TableName = TableName ?? typeof(T).Name;
+            options.TableName = typeof(T).Name;
             return options;
         }
         /// <summary>

@@ -16,7 +16,7 @@
     <ProjectReference Include="..\Monster.Business\Monster.Business.csproj" />
     <ProjectReference Include="..\Monster.Core\Monster.Core.csproj" />
     <ProjectReference Include="..\Monster.Entity\Monster.Entity.csproj" />
-    <ProjectReference Include="..\Monster.System\Monster.System.csproj" />
+    <ProjectReference Include="..\Monster.System\Monster.Sys.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,7 +6,7 @@ using Monster.Core.Extensions;
 using System.Collections.Generic;
 using Monster.Core.Enums;
 
-namespace Monster.System.Services
+namespace Monster.Sys.Services
 {
     public partial class Sys_DictionaryListService
     {

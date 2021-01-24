@@ -15,7 +15,7 @@ using System.Linq.Expressions;
 using Monster.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Monster.System.Services
+namespace Monster.Sys.Services
 {
     public partial class UserSignService
     {

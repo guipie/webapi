@@ -26,17 +26,13 @@ namespace Monster.Entity.DomainModels
         public int Id { get; set; }
 
 
-        /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "Name")]
+        [Display(Name = "论坛名称")]
         [MaxLength(10)]
         [Column(TypeName = "nvarchar(10)"), Editable(true)]
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
 
-        [Display(Name = "Description")]
-
+        [Display(Name = "论坛描述")]
         [MaxLength(200)]
         [Column(TypeName = "nvarchar(200)"), Editable(true)]
         public string Description { get; set; }
@@ -45,11 +41,15 @@ namespace Monster.Entity.DomainModels
         public string BgImg { get; set; }
 
 
-        [Display(Name = "Sequence")]
+        [Display(Name = "排序自动")]
         [Column(TypeName = "int"), Editable(true), DefaultValue(1)]
         [Required(AllowEmptyStrings = false)]
         public int Sequence { get; set; }
 
+
+        [Display(Name = "被关注数量")]
+        [Column(TypeName = "int"), DefaultValue(1)]
+        public int FollowCount { get; set; }
 
         [Display(Name = "状态")]
         [Column(TypeName = "int"), Editable(true), DefaultValue(1)]

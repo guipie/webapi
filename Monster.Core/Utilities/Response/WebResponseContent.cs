@@ -44,7 +44,12 @@ namespace Monster.Core.Utilities
             this.Data = data;
             return this;
         }
-
+        public WebResponseContent OK(object data)
+        {
+            this.Status = true;
+            this.Data = data;
+            return this;
+        }
         public WebResponseContent OK(ResponseType responseType)
         {
             return Set(responseType, true);

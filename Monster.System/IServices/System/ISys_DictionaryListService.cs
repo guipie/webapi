@@ -7,7 +7,7 @@
 using Monster.Core.BaseProvider;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.IServices
+namespace Monster.Sys.IServices
 {
     public partial interface ISys_DictionaryListService : IService<Sys_DictionaryList>
     {

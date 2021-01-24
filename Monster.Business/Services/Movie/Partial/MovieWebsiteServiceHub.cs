@@ -6,11 +6,8 @@ using Monster.Core.Utilities;
 using Monster.Core.Utilities.Crawler.MovieCrawer;
 using Monster.Core.Utilities.HttpCrawler.MovieCrawer;
 using Monster.Entity.DomainModels;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Monster.Business.Services.Movie.Partial

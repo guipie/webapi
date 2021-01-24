@@ -178,7 +178,7 @@ namespace Monster.Core.BaseProvider
             foreach (Source source in sources)
             {
                 Expression<Func<TEntity, bool>> expression = predicate(source);
-                resultPredicate = (resultPredicate).Or<TEntity>((expression));
+                resultPredicate = resultPredicate.Or(expression);
             }
             return EFContext.Set<TEntity>().Where(resultPredicate);
         }

@@ -4,9 +4,9 @@
 using Monster.Core.BaseProvider;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.IServices
+namespace Monster.Business.IServices
 {
-    public partial interface ISys_user_followService : IService<Sys_user_follow>
+    public partial interface IUserFollowService : IService<Sys_user_follow>
     {
     }
 }

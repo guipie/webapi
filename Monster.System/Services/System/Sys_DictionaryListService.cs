@@ -4,13 +4,13 @@
  *Date：2018-07-01
  * 此代码由框架生成，请勿随意更改
  */
-using Monster.System.IRepositories;
-using Monster.System.IServices;
+using Monster.Sys.IRepositories;
+using Monster.Sys.IServices;
 using Monster.Core.BaseProvider;
 using Monster.Core.Extensions.AutofacManager;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.Services
+namespace Monster.Sys.Services
 {
     public partial class Sys_DictionaryListService : ServiceBase<Sys_DictionaryList, ISys_DictionaryListRepository>, ISys_DictionaryListService, IDependency
     {

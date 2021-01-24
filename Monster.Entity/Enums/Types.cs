@@ -12,4 +12,9 @@ namespace Monster.Entity.Enums
         voice = 4,
         article = 5
     }
+    public enum FollowTypeEnum
+    {
+        user = 1,
+        bbs = 2
+    }
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,6 +7,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Monster.Core\Monster.Core.csproj" />
     <ProjectReference Include="..\Monster.Entity\Monster.Entity.csproj" />
+    <ProjectReference Include="..\Monster.System\Monster.Sys.csproj" />
+    <ProjectReference Include="..\Monster.Sys\Monster.Sys.csproj" />
   </ItemGroup>
 
 </Project>

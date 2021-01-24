@@ -70,11 +70,6 @@ namespace Monster.Core.Filters
         protected Expression<Func<T, Dictionary<object, QueryOrderBy>>> OrderByExpression;
 
         /// <summary>
-        /// 设置查询的表名(已弃用)
-        /// </summary>
-        protected string TableName { get; set; }
-
-        /// <summary>
         /// 页面查询或导出，从数据库查询出来的结果
         /// </summary>
         protected Action<PageGridData<T>> GetPageDataOnExecuted;

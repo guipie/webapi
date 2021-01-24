@@ -43,7 +43,7 @@ namespace Monster.Entity.DomainModels
         [Display(Name = "状态")]
         [Column(TypeName = "int"), DefaultValue(1)]
         public int? Status { get; set; }
-
+        
 
         [Display(Name = "类别")]
         [Column(TypeName = "nvarchar(20)"), Editable(true), MaxLength(20)]
@@ -146,8 +146,8 @@ namespace Monster.Entity.DomainModels
         ///标题
         /// </summary>
         [Display(Name = "标题")]
-        [MaxLength(50)]
-        [Column(TypeName = "nvarchar(50)")]
+        [MaxLength(30)]
+        [Column(TypeName = "nvarchar(30)")]
         [Required(AllowEmptyStrings = false)]
         [Editable(true)]
         public string Title { get; set; }

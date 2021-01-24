@@ -1,10 +1,10 @@
-﻿using Monster.System.IRepositories;
-using Monster.System.IServices;
+﻿using Monster.Sys.IRepositories;
+using Monster.Sys.IServices;
 using Monster.Core.BaseProvider;
 using Monster.Core.Extensions.AutofacManager;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.Services
+namespace Monster.Sys.Services
 {
     public partial class Sys_MenuService : ServiceBase<Sys_Menu, ISys_MenuRepository>, ISys_MenuService, IDependency
     {

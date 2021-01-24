@@ -17,11 +17,11 @@ using Monster.Core.ObjectActionValidator;
 using Monster.Core.Utilities;
 using Monster.Entity.AttributeManager;
 using Monster.Entity.DomainModels;
-using Monster.System.IRepositories;
-using Monster.System.IServices;
-using Monster.System.Repositories;
+using Monster.Sys.IRepositories;
+using Monster.Sys.IServices;
+using Monster.Sys.Repositories;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     [Route("api/User")]
     public partial class Sys_UserController

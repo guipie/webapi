@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Monster.Core.Controllers.Basic;
 using Monster.Core.Extensions;
 using Monster.Core.Filters;
-using Monster.System.IServices;
+using Monster.Sys.IServices;
 using System.Collections.Generic;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     [Route("api/Sys_Dictionary")]
     public partial class Sys_DictionaryController : ApiBaseController<ISys_DictionaryService>

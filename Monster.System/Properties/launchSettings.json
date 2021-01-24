@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Monster.System": {
+    "Monster.Sys": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

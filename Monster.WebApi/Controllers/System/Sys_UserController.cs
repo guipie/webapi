@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Monster.Core.Controllers.Basic;
 using Monster.Entity.AttributeManager;
 using Monster.Entity.DomainModels;
-using Monster.System.IServices;
+using Monster.Sys.IServices;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     [Route("api/Sys_User")]
     [PermissionTable(Name = "Sys_User")]

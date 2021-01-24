@@ -4,9 +4,9 @@ using Monster.Core.Controllers.Basic;
 using Monster.Core.Enums;
 using Monster.Core.Filters;
 using Monster.Entity.DomainModels;
-using Monster.System.IServices;
+using Monster.Sys.IServices;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     [Route("api/menu")]
     [ApiController, JWTAuthorize()]

@@ -14,11 +14,13 @@ namespace Monster.Business.Services
 {
     public partial class NewsTypeService : ServiceBase<NewsType, INewsTypeRepository>, INewsTypeService, IDependency
     {
-        IWebsiteHomeConfigRepository websiteHomeConfigRepository;
-        public NewsTypeService(INewsTypeRepository repository, IWebsiteHomeConfigRepository repository1)
+        readonly IWebsiteHomeConfigRepository websiteHomeConfigRepository;
+        readonly IUserFollowRepository userFollowRepository;
+        public NewsTypeService(INewsTypeRepository repository, IWebsiteHomeConfigRepository repository1, IUserFollowRepository repository2)
              : base(repository)
         {
             websiteHomeConfigRepository = repository1;
+            userFollowRepository = repository2;
             Init(repository);
         }
         public static INewsTypeService Instance

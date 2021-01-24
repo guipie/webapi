@@ -42,6 +42,7 @@ namespace Monster.Business.Services
                            news.CoverImageUrls,
                            news.Type,
                            news.Title,
+                           news.Tags,
                            news.Summary,
                            news.VideoUrl,
                            news.VoiceUrl,
@@ -51,6 +52,7 @@ namespace Monster.Business.Services
                            PraiseCount = newsPraiseRepository.FindAsIQueryable(m => m.NewsId == news.NewsId).Count(),
                            CommentCount = newsCommentRepository.FindAsIQueryable(m => m.RelationId == news.NewsId).Count()
                        };
+
             return new { data, result.total, size = options.Rows };
         }
         public object GetDetail(int Id)

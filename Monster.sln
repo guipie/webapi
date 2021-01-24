@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.Entity", "Monster.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.Builder", "Monster.Builder\Monster.Builder.csproj", "{C71993AA-586E-4AF4-AD77-B5D7A07B3B7B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.System", "Monster.System\Monster.System.csproj", "{9F688BF2-B51B-4812-B0C4-8F5D13114E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.Sys", "Monster.System\Monster.Sys.csproj", "{9F688BF2-B51B-4812-B0C4-8F5D13114E9E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.WebApi", "Monster.WebApi\Monster.WebApi.csproj", "{4DB3C91B-93FE-4937-8B58-DDD3F57D4607}"
 EndProject

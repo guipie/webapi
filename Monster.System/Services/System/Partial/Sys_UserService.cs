@@ -12,7 +12,7 @@ using Monster.Core.Services;
 using Monster.Core.Utilities;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.Services
+namespace Monster.Sys.Services
 {
     public partial class Sys_UserService
     {

@@ -4,13 +4,13 @@
  *Date：2018-07-01
  * 此代码由框架生成，请勿随意更改
  */
-using Monster.System.IRepositories;
+using Monster.Sys.IRepositories;
 using Monster.Core.BaseProvider;
 using Monster.Core.EFDbContext;
 using Monster.Core.Extensions.AutofacManager;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.Repositories
+namespace Monster.Sys.Repositories
 {
     public partial class Sys_DictionaryRepository : RepositoryBase<Sys_Dictionary>, ISys_DictionaryRepository
     {

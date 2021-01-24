@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Monster.Core.Utilities;
 using Monster.Entity.DomainModels;
 
-namespace Monster.System.IServices
+namespace Monster.Sys.IServices
 {
     public partial interface ISys_MenuService
     {

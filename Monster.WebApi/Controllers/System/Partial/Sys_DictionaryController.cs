@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Monster.Core.Controllers.Basic;
 using Monster.Core.Extensions;
 using Monster.Core.Filters;
-using Monster.System.IServices;
+using Monster.Sys.IServices;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Monster.System.Controllers
+namespace Monster.Sys.Controllers
 {
     [AllowAnonymous]
     [Route("AppApi/Dic")]

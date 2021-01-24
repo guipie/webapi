@@ -5,7 +5,7 @@ using Monster.Core.BaseProvider;
 using Monster.Entity.DomainModels;
 using Monster.Core.Utilities;
 using System.Linq.Expressions;
-namespace Monster.System.IServices
+namespace Monster.Sys.IServices
 {
     public partial interface IUserSignService
     {

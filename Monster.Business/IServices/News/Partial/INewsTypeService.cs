@@ -13,5 +13,8 @@ namespace Monster.Business.IServices
     public partial interface INewsTypeService
     {
         object GetRecommendList();
+        WebResponseContent FollowBbs(int bbsId);
+        NewsType GetOneByName(string name);
+        bool FollowExist(int bbsId);
     }
 }

@@ -5,8 +5,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Monster.Core.Controllers.Basic;
 using Monster.Entity.AttributeManager;
-using Monster.System.IServices;
-namespace Monster.System.Controllers
+using Monster.Sys.IServices;
+namespace Monster.Sys.Controllers
 {
     [Route("api/UserSign")]
     [PermissionTable(Name = "UserSign")]

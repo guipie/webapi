@@ -21,6 +21,7 @@ using Monster.Core.Extensions;
 using Monster.Core.Filters;
 using Monster.Core.Middleware;
 using Monster.Core.ObjectActionValidator;
+using Newtonsoft.Json;
 
 namespace Monster.WebApi
 {
@@ -56,8 +57,11 @@ namespace Monster.WebApi
             services.AddControllers()
               .AddNewtonsoftJson(op =>
               {
+                  //数据格式首字母小写
                   op.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
                   op.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                  //忽略空值 不包含属性的null序列化
+                  op.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
               });
 
             Services.AddAuthentication(options =>

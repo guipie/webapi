@@ -33,5 +33,30 @@ namespace Monster.Business.Services
                        Img = recommend.BannerImg ?? list.BgImg
                    };
         }
+        public NewsType GetOneByName(string name)
+        {
+            return repository.FindFirst(m => m.Name == name);
+        }
+        public WebResponseContent FollowBbs(int bbsId)
+        {
+            bool isExist = userFollowRepository.Exists(m => m.FollowType == Entity.Enums.FollowTypeEnum.bbs && m.FollowId == bbsId);
+            if (isExist)
+                return WebResponseContent.Instance.Error("您已经关注了.");
+            else
+            {
+                var currentBbs = GetOne(bbsId);
+                repository.Update(new NewsType() { Id = bbsId, FollowCount = currentBbs.FollowCount + 1 }, (m) => m.FollowCount, true);
+                var addModel = new Sys_user_follow() { FollowId = bbsId, FollowType = Entity.Enums.FollowTypeEnum.bbs };
+                userFollowRepository.Add(addModel.SetCreateDefaultVal(), true);
+
+                return WebResponseContent.Instance.Info(addModel.Id > 0);
+            }
+        }
+
+        public bool FollowExist(int bbsId)
+        {
+            bool isExist = userFollowRepository.Exists(m => m.FollowType == Entity.Enums.FollowTypeEnum.bbs && m.FollowId == bbsId);
+            return isExist;
+        }
     }
 }
