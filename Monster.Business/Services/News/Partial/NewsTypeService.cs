@@ -28,9 +28,10 @@ namespace Monster.Business.Services
                    select new
                    {
                        list.Id,
+                       list.Name,
                        recommend.Title,
                        Description = recommend.Description ?? list.Description,
-                       Img = recommend.BannerImg ?? list.BgImg
+                       BgImg = recommend.BannerImg ?? list.BgImg
                    };
         }
         public NewsType GetOneByName(string name)
