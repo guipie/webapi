@@ -14,14 +14,16 @@ namespace Monster.Business.Services
 {
     public partial class NewsAppendService : ServiceBase<NewsAppend, INewsAppendRepository>, INewsAppendService, IDependency
     {
-        public NewsAppendService(INewsAppendRepository repository)
-             : base(repository) 
-        { 
-           Init(repository);
+        private readonly INewsRepository newsRepository;
+        public NewsAppendService(INewsAppendRepository repository, INewsRepository repository1)
+             : base(repository)
+        {
+            newsRepository = repository1;
+            Init(repository);
         }
         public static INewsAppendService Instance
         {
-           get { return AutofacContainerModule.GetService<INewsAppendService>(); }
+            get { return AutofacContainerModule.GetService<INewsAppendService>(); }
         }
     }
 }

@@ -5,7 +5,9 @@
  */
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Monster.Core.Utilities;
 using Monster.Entity.DomainModels;
+using System.Threading.Tasks;
 
 namespace Monster.Business.Controllers
 {
@@ -15,7 +17,7 @@ namespace Monster.Business.Controllers
         [HttpPost, Route("Index"), AllowAnonymous]
         public IActionResult NewsAppendList([FromBody] PageDataOptions options)
         {
-            return Json(Service.GetPageData(options));
+            return Json(Service.GetPageDataExtends(options));
         }
     }
 }

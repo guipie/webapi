@@ -31,10 +31,10 @@ namespace Monster.Core.Utilities
         {
             get { return new WebResponseContent(); }
         }
-        public WebResponseContent Info(bool status, string message = "")
+        public WebResponseContent Info(bool status, string message = "", string errorMessage = "")
         {
             this.Status = status;
-            this.Message = message.IsNullOrEmpty() ? (status ? "操作成功" : "操作失败.") : message;
+            this.Message = status ? (message ?? "操作失败.") : (errorMessage ?? "操作失败");
             return this;
         }
         public WebResponseContent OK(string message = null, object data = null)

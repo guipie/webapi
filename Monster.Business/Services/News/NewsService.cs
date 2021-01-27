@@ -20,12 +20,14 @@ namespace Monster.Business.Services
     public partial class NewsService : ServiceBase<News, INewsRepository>, INewsService, IDependency
     {
         private readonly INewsPraiseRepository newsPraiseRepository;
+        private readonly IUserFollowRepository userFollowRepository;
         private readonly INewsCommentRepository newsCommentRepository;
-        public NewsService(INewsRepository repository, INewsPraiseRepository repository1, INewsCommentRepository repository2)
+        public NewsService(INewsRepository repository, INewsPraiseRepository repository1, IUserFollowRepository repository2, INewsCommentRepository repository3)
              : base(repository)
         {
             newsPraiseRepository = repository1;
-            newsCommentRepository = repository2;
+            userFollowRepository = repository2;
+            newsCommentRepository = repository3;
             Init(repository);
         }
         public static INewsService Instance
@@ -69,9 +71,10 @@ namespace Monster.Business.Services
                     if (repository.DbContext.SaveChanges() > 0)
                         return responseContent.OK("创建成功.");
                 }
+                news.SetModifyDefaultVal();
                 return responseContent.OK();
             };
-            return base.Add(saveModel).OK("已提交，正在审核中.."); 
+            return base.Add(saveModel).OK("已提交，正在审核中..");
         }
     }
 }

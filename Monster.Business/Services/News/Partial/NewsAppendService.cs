@@ -14,10 +14,36 @@ using Monster.Core.Utilities;
 using System.Linq.Expressions;
 using Monster.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Monster.Business.Services
 {
     public partial class NewsAppendService
     {
+        public object GetPageDataExtends(PageDataOptions options)
+        {
+            var data = base.GetPageData(options);
+            var rows = from p in data.rows
+                       join users in repository.DbContext.Set<Sys_User>()
+                       on p.CreateID equals users.User_Id
+                       select new
+                       {
+                           p.Content,
+                           p.CreateDate,
+                           users.HeadImageUrl,
+                           users.UserTrueName
+                       };
+            return new { rows, data.total };
+        }
+        public new WebResponseContent Add(SaveModel saveModel)
+        {
+            base.AddOnExecuted = (NewsAppend model, object list) =>
+            {
+                News news = new News() { NewsId = model.NewsId }.SetModifyDefaultVal();
+                newsRepository.Update(news, m => new { m.ModifyDate, m.Modifier, m.ModifyID }, true);
+                return WebResponseContent.Instance.OK("成功回帖");
+            };
+            return base.Add(saveModel);
+        }
     }
 }

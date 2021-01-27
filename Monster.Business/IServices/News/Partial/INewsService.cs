@@ -16,5 +16,8 @@ namespace Monster.Business.IServices
         /// <returns></returns>
         object GetList(PageDataOptions options);
         object GetDetail(int key);
+
+        WebResponseContent Like(int key);
+        WebResponseContent Praise(int key);
     }
 }

@@ -76,6 +76,27 @@ namespace Monster.Business.Services
             };
             return result;
         }
-
+        public WebResponseContent Like(int key)
+        {
+            if (userFollowRepository.Exists(m => m.FollowId == key && m.FollowType == Entity.Enums.FollowTypeEnum.news))
+                return WebResponseContent.Instance.Error("已经收藏了");
+            else
+            {
+                var addModel = new Sys_user_follow() { FollowId = key, FollowType = Entity.Enums.FollowTypeEnum.news }.SetCreateDefaultVal();
+                userFollowRepository.Add(addModel, true);
+                return WebResponseContent.Instance.Info(addModel.Id > 0,"已收藏");
+            }
+        }
+        public WebResponseContent Praise(int key)
+        {
+            if (newsPraiseRepository.Exists(m => m.NewsId == key))
+                return WebResponseContent.Instance.Error("已经赞啦");
+            else
+            {
+                var addModel = new NewsPraise() { NewsId = key }.SetCreateDefaultVal();
+                newsPraiseRepository.Add(addModel, true);
+                return WebResponseContent.Instance.Info(addModel.Id > 0);
+            }
+        }
     }
 }

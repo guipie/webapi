@@ -9,5 +9,7 @@ namespace Monster.Business.IServices
 {
     public partial interface INewsAppendService
     {
+        object GetPageDataExtends(PageDataOptions options);
+        new WebResponseContent Add(SaveModel saveModel);
     }
- }
+}

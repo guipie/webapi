@@ -14,7 +14,17 @@ namespace Monster.Entity.Enums
     }
     public enum FollowTypeEnum
     {
+        /// <summary>
+        /// 关注的用户
+        /// </summary>
         user = 1,
-        bbs = 2
+        /// <summary>
+        /// 关注的论坛
+        /// </summary>
+        bbs = 2,
+        /// <summary>
+        /// 喜欢的帖子
+        /// </summary>
+        news = 3
     }
 }

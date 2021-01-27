@@ -18,18 +18,30 @@ using Monster.Business.Services;
 namespace Monster.Business.Controllers
 {
     [Route("AppApi/News")]
-    [AllowAnonymous]
     public partial class NewsController
     {
+        [AllowAnonymous]
         [HttpPost, Route("Index")]
         public IActionResult RecommendList([FromBody] PageDataOptions options)
         {
             return Json(Service.GetList(options));
         }
+        [AllowAnonymous]
         [HttpGet, HttpPost, Route("{Id}")]
         public IActionResult NewsOne(int Id)
         {
             return Json(Service.GetDetail(Id));
+        }
+         
+        [HttpGet, HttpPost, Route("Like/{Id}")]
+        public IActionResult LikeOne(int Id)
+        {
+            return Json(Service.Like(Id));
+        }
+        [HttpGet, HttpPost, Route("Praise/{Id}")]
+        public IActionResult PraiseOne(int Id)
+        {
+            return Json(Service.Praise(Id));
         }
     }
 }
