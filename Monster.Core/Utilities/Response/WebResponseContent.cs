@@ -34,7 +34,7 @@ namespace Monster.Core.Utilities
         public WebResponseContent Info(bool status, string message = "", string errorMessage = "")
         {
             this.Status = status;
-            this.Message = status ? (message ?? "操作失败.") : (errorMessage ?? "操作失败");
+            this.Message = status ? (message ?? "操作成功.") : (errorMessage ?? "操作失败");
             return this;
         }
         public WebResponseContent OK(string message = null, object data = null)

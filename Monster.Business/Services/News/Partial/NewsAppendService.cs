@@ -28,6 +28,7 @@ namespace Monster.Business.Services
                        on p.CreateID equals users.User_Id
                        select new
                        {
+                           p.Id,
                            p.Content,
                            p.CreateDate,
                            users.HeadImageUrl,

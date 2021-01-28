@@ -71,6 +71,8 @@ namespace Monster.Business.Services
                 news.VideoUrl,
                 news.VoiceUrl,
                 news.CreateDate,
+                news.Modifier,
+                news.ModifyDate,
                 user.UserTrueName,
                 user.HeadImageUrl
             };
@@ -84,7 +86,7 @@ namespace Monster.Business.Services
             {
                 var addModel = new Sys_user_follow() { FollowId = key, FollowType = Entity.Enums.FollowTypeEnum.news }.SetCreateDefaultVal();
                 userFollowRepository.Add(addModel, true);
-                return WebResponseContent.Instance.Info(addModel.Id > 0,"已收藏");
+                return WebResponseContent.Instance.Info(addModel.Id > 0, "已收藏");
             }
         }
         public WebResponseContent Praise(int key)

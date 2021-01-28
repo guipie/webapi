@@ -35,7 +35,7 @@ namespace Monster.Entity.DomainModels
         ///
         /// </summary>
         [Display(Name = "Content")]
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "mediumtext")]
         [Required(AllowEmptyStrings = false), Editable(true)]
         public string Content { get; set; }
 
